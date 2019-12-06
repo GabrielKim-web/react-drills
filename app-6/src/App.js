@@ -1,18 +1,35 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import Todo from './Todo.js';
+// import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      userInput: '',
+      todoList: []
+    };
+  }
+  handleChange(value) {
+    this.setState({userInput: value});
+  }
+  addItem(value) {
+    const {todoList} = this.state;
+    todoList.push(value);
+    this.setState({todoList: todoList, userInput: ''});
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>To-do List</h1>
+        <input placeholder= "Enter task" onChange={(e) => this.handleChange(e.target.value)} />
+        <button onClick={() => this.addItem(this.state.userInput)}>Add Task</button>
+        <Todo 
+        todoList={this.state.todoList}
+        />
       </div>
     );
   }
