@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 class NewTask extends Component {
    constructor () {
@@ -11,11 +11,6 @@ class NewTask extends Component {
    handleChange(value) {
       this.setState({userInput: value});
    }
-   handleAddTask(value) {
-      const {list} = this.state;
-      list.push(value);
-      this.setState({list: list, userInput: ''});
-    }
    render() {
       return(
          <div>
@@ -24,7 +19,7 @@ class NewTask extends Component {
                value={this.state.input}
                placeholder="New task"
                onChange={(e) => this.handleChange(e.target.value)}/>
-            <button onClick={() => this.props.handleAddTask(this.state.userInput)}>Add Task</button>
+            <button onClick={() => this.props.addTask(this.state.userInput)}>Add Task</button>
          </div>
       )
    }

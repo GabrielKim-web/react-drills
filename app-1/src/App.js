@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
@@ -7,16 +6,12 @@ class App extends Component {
     super();
 
     this.state = {
-      text: '',
       userInput: ''
     };
   }
   handleChange(value) {
     this.setState({userInput: value});
   }
-  // setText(value) {
-  //   this.setState({text: value});
-  // }
   render() {
     return (
       <div className="App">

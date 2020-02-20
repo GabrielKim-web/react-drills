@@ -10,19 +10,28 @@ class App extends Component {
     super();
 
     this.state = {
-      list: []
+      tasks: [],
     }
+    this.addTask=this.addTask.bind(this);
+  }
+
+  addTask(task) {
+    const {tasks} = this.state;
+    tasks.push(task)
+    this.setState({tasks})
   }
   render() {
-    let list = this.state.list.map((element, index) => {
+    let tasks = this.state.tasks.map((element, index) => {
       return <Todo key={index} task={element} />;
     })
     return (
       <div className="App">
-        <h1>My To-Do List</h1>
-        <NewTask list={this.state.list}/>
-        <List list={this.state.list}/>
-        {list}
+        <NewTask addTask={this.addTask}/>
+        <h1>My To-Do tasks</h1>
+        {tasks}
+        <ul>
+          <List tasks={this.state.tasks}/>
+        </ul>
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
@@ -7,7 +6,7 @@ class App extends Component {
     super();
 
     this.state = {
-      array: [],
+      array: ['spaghetti', 'ice cream', 'sushi', 'bologna', 'cheese'],
       userInput: ''
     }
   }
@@ -15,36 +14,20 @@ class App extends Component {
     this.setState({userInput: value});
   }
 
-  updateArray(value) {
-    const {array} = this.state;
-    array.push(value);
-    this.setState({array: array});
-  }
 
-  removeItem(index) {
-    const {array} = this.state;
-    console.log(index);
-    array.splice(index, 1)
-    this.setState({array: array});
-  }
 
   render() {
+    const {array, userInput} = this.state;
+    // includes is better than startsWith since we can search "cream" and still get "ice cream"
+    // const filter = array.filter(element => element.startsWith(userInput));
+    const filter = array.filter(element => {return element.includes(userInput)} );
     return (
       <div className="App">
         <h1>To-do list for OOF</h1>
-        <input onChange={(e) => this.handleChange(e.target.value)}></input>
-        <button onClick={() => this.updateArray(this.state.userInput)}>Add item</button>
-        <span>How do I display this again? {this.state.array.map((element, index) => {
-          return (
-            <div key= {`${element}-${index}`}>
-              <h2>{`List ${index + 1}: ${element}`}</h2>
-
-              {/* ADD INDEX HERE. IT WORKS. IT JUST DOES. */}
-              <button onClick={(e) => this.removeItem(index)}>Remove item</button>
-            </div>
-          )
+        <input placeholder="Search by" onChange={(e) => this.handleChange(e.target.value)}></input>
+        {filter.map((element, index) => {
+          return <div key={index}>{element}</div>
         })}
-        </span>
       </div>
     );
   }
